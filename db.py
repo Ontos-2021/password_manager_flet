@@ -47,10 +47,11 @@ def fetch_passwords():
     """Obtiene todas las contraseñas de la base de datos."""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM passwords")
+    cursor.execute("SELECT * FROM passwords")  # Asegúrate de que la columna exista
     passwords = cursor.fetchall()
     conn.close()
     return passwords
+
 
 def delete_password(password_id):
     """Elimina una contraseña de la base de datos."""

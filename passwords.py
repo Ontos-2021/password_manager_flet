@@ -61,20 +61,16 @@ def save_password(seed, platform, description, password, iterations, master_key)
 
 
 def get_passwords(master_key):
-    """
-    Obtiene todas las contraseñas descifradas desde la base de datos.
-    """
-    passwords = fetch_passwords()  # Obtiene las contraseñas cifradas
+    passwords = fetch_passwords()  # Obtiene las contraseñas cifradas de la base de datos
     decrypted_passwords = []
     for record in passwords:
         id_, seed, platform, description, encrypted_password, iterations, created_at = record
         try:
             decrypted_password = decrypt(encrypted_password, master_key)
-            decrypted_passwords.append(
-                (id_, seed, platform, description, decrypted_password.decode(), iterations, created_at))
+            decrypted_passwords.append((id_, seed, platform, description, decrypted_password.decode(), iterations, created_at))
         except Exception as e:
-            decrypted_passwords.append(
-                (id_, seed, platform, description, "ERROR: No se pudo descifrar", iterations, created_at))
+            print(f"Error al descifrar contraseña ID={id_}: {e}")  # Log detallado
+            decrypted_passwords.append((id_, seed, platform, description, "ERROR: No se pudo descifrar", iterations, created_at))
     return decrypted_passwords
 
 

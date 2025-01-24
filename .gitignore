@@ -1,2 +1,5 @@
 .idea/
 .DS_Store
+__pycache__/
+password_manager.db
+templates/__pycache__/
