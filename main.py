@@ -81,4 +81,5 @@ def main(page: ft.Page):
 
 
 if __name__ == "__main__":
-    ft.app(target=main, view="web_browser")
+    ft.app(target=main, view=ft.AppView.FLET_APP)
+
